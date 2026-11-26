@@ -28,13 +28,21 @@ public class Sauce : Ingredient, IDiet
 
     public Level Spiciness { get; set; }
 
-    public double RecalculateCalories()
-    {
-        return Calories * Mass / 100;
-    }
+   public double RecalculateCalories()
+{
+    double calories = SauceType == SauceType.Creamy
+        ? Calories
+        : Calories * 0.80;
 
-    public double RecalculatePrice()
-    {
-        return Price * Mass / 100;
-    }
+    return calories * Mass / 100;
+}
+
+public double RecalculatePrice()
+{
+    double price = SauceType == SauceType.Creamy
+        ? Price
+        : Price * 0.90;
+
+    return price * Mass / 100;
+}
 }
