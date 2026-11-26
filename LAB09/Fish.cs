@@ -27,13 +27,21 @@ public class Fish : Ingredient, IDiet
 
     public Habitat FishHabitat { get; set; }
 
-    public double RecalculateCalories()
-    {
-        return Calories * Mass / 100;
-    }
+   public double RecalculateCalories()
+{
+    double calories = FishType == FishType.Cod
+        ? Calories * 0.85
+        : Calories;
 
-    public double RecalculatePrice()
-    {
-        return Price * Mass / 100;
-    }
+    return calories * Mass / 100;
+}
+
+public double RecalculatePrice()
+{
+    double price = FishType == FishType.Cod
+        ? Price * 0.95
+        : Price;
+
+    return price * Mass / 100;
+}
 }
