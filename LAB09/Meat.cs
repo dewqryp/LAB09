@@ -21,13 +21,19 @@ public class Meat : Ingredient, IDiet
         FatPercentage = fatPercentage;
     }
 
-    public double RecalculateCalories()
-    {
-        return (Calories - FatPercentage / 100 * 8) * Mass / 100;
-    }
+public double RecalculateCalories()
+{
+    double dietaryCalories = Math.Max(0, Calories - FatPercentage * 9);
 
-    public double RecalculatePrice()
-    {
-        return Price * Mass / 100;
-    }
+    return dietaryCalories * Mass / 100;
+}
+
+public double RecalculatePrice()
+{
+    double price = FatPercentage <= 10
+        ? Price * 0.95
+        : Price;
+
+    return price * Mass / 100;
+}
 }
